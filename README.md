@@ -1,26 +1,35 @@
+*经测试有些ip访问时会显示下图*
 
->  新项目 [基于OpenAI的微信机器人](https://github.com/x-dr/wechat-bot)
+<img src="https://image.3001.net/images/20231116/1700131811_6555f3e30a1efc2db761f.png" height="50%" width="50%" /></a>
 
+
+---
 ### Demo
 
-[https://chatai.1rmb.tk](https://chatai.1rmb.tk)
+[https://chatai.451024.xyz](https://chatai.451024.xyz)
 
 > api
+
 ```url
-https://openai.1rmb.tk
+https://openai.451024.xyz
 ```
 
-或
 
 ```url
 https://openai-proxy-api.pages.dev/api
 ```
+***
+
+>  新项目 [基于OpenAI的微信机器人](https://github.com/x-dr/wechat-bot)
+
+***
 
 ### 演示站为公共服务，如有大规模使用需求请自行部署，演示站有点不堪重负
 
 ![worker](./docs/img/worker.png)
 
-## 1、利用Cloudflare Worker中转api.openai.com
+
+## 利用Cloudflare Worker中转api.openai.com
 
 1. 新建一个 Cloudflare Worker
 2. 复制 [cf_worker.js](https://cdn.jsdelivr.net/gh/x-dr/chatgptProxyAPI@main/cf_worker.js)  里的代码粘贴到 Worker 中并部署
@@ -31,47 +40,44 @@ https://openai-proxy-api.pages.dev/api
 **[详细教程](./docs/cloudflare_workers.md)**
 
 
-## 2、使用CloudFlare Pages进行中转
 
-**[详细教程](./docs/cloudflare_proxy_pages.md)**
+***
 
-## 3、利用nextjs edge中转api.openai.com
 
-### 利用Cloudflare pages部署
 
-> [官方文档](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
+## 使用CloudFlare Pages进行中转
+
+### 1、部署中转API+ Openai API余额查询 (使用sess-xxxx的Authorization查询，有效时间未知)
+
+> [官方文档](https://developers.cloudflare.com/pages)
 
 1. ~~Fork本项目~~ 点击[Use this template](https://github.com/x-dr/chatgptProxyAPI/generate)按钮创建一个新的代码库。
 2. 登录到[Cloudflare](https://dash.cloudflare.com/)控制台.
 3. 在帐户主页中，选择`pages`> ` Create a project` > `Connect to Git`
-4. 选择你 Fork 的项目存储库，在`Set up builds and deployments`部分中，选择`Next.js`作为您的框架预设。您的选择将提供以下信息。
+4. 选择你 Fork 的项目存储库，在`Set up builds and deployments`部分中，全部默认即可。
 
-> 一般默认即可
-
-|  Configuration option	   | Value  |
-|  ----  | ----  |
-| Production branch  | main |
-| Framework preset  | next.js |
-| Build command	  | npx @cloudflare/next-on-pages --experimental-minify|
-| Build directory  | .vercel/output/static|
-
-
-> 在 `Environment variables (advanced)`添加一个参数
-
-|  Variable name	   | Value  |
-|  ----  | ----  |
-| NODE_VERSION   | 16 |
 
 5. 点击`Save and Deploy`部署，然后点`Continue to project`即可看到访问域名
 
 
-> 把官方接口的`https://api.openai.com`替换为`https://xxx.pages.dev/api` 即可 (https://xxx.pages.dev/api 为你的域名)
+> 把官方接口的`https://api.openai.com`替换为`https://xxx.pages.dev` 即可
 
-*注意路径多了一个`api`*
+**Demo**
+
+[https://chatai.451024.xyz](https://chatai.451024.xyz)
 
 **[详细教程](./docs/cloudflare_pages.md)**
 
-### docker 部署（要境外vps） 
+
+### 2、只部署中转API
+
+
+**[详细教程](./docs/cloudflare_proxy_pages.md)**
+
+
+
+
+## docker 部署（要境外vps） 
 
 > 好像不支持sse 所以不建议
 
@@ -253,4 +259,8 @@ example()
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=x-dr/chatgptProxyAPI&type=Date)](https://star-history.com/#x-dr/chatgptProxyAPI&Date)
+
+
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
 
